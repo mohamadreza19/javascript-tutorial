@@ -10,7 +10,7 @@ const App =()=>{
         setName(names)
         })
     }
-
+throw new Error('ErrorBtch')
     return(
        <div className='text-center'>
            <h1>app</h1>
