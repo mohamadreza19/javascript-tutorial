@@ -1,26 +1,22 @@
-// import names from "./names";
+import {Helmet,HelmetProvider} from 'react-helmet-async'
 import {useState} from "react";
+import { FcCheckmark } from "react-icons/fc";
 
 
 const App =()=>{
     const [names, setName] = useState(null)
-    const onLoad = () =>{
-        import("./names")
-        .then( ({names} )=>{
-        setName(names)
-        })
-    }
-throw new Error('ErrorBtch')
-    return(
-       <div className='text-center'>
-           <h1>app</h1>
-           <button
-               onClick={onLoad}
-           >click</button>
-           <hr/>
-           {JSON.stringify(names)}
 
-       </div>
+
+    return(
+       <HelmetProvider>
+           <Helmet>
+               <title>دوره جامع ریکت  </title>
+           </Helmet>
+           <div className='text-center'>
+               <h1>app</h1>
+               < FcCheckmark/>
+           </div>
+       </HelmetProvider>
     )
 }
 
