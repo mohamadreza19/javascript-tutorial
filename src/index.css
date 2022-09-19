@@ -4,7 +4,13 @@ body{
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    direction: rtl;
+    text-align: center;
+
 }
 .Toastifiy__toast-body{
     font-family:"Dirooz","tahoma","Ubuntu";
+}
+.fsf{
+    color: #000000;
 }
