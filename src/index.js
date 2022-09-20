@@ -19,13 +19,9 @@ const root =ReactDom.createRoot(document.getElementById("root"))
 
 root.render(
     <React.StrictMode>
-        <ErrorBoundary FallbackComponent ={ErrorFallback}
-        onReset={
-            ()=>{}
-        }
-        >
+
             <App/>
-        </ErrorBoundary>
+
 
     </React.StrictMode>
 )

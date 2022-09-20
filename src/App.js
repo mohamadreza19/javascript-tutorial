@@ -1,4 +1,9 @@
+//HELMET
+import {HelmetProvider, Helmet} from 'react-helmet-async'
+
 import {ThemeProvider, createTheme,responsiveFontSizes} from '@mui/material/styles'
+
+import  {purple} from '@mui/material/colors'
  //TRL
 import {CacheProvider} from '@emotion/react'
 import createCache from "@emotion/cache"
@@ -7,8 +12,12 @@ import {prefixer} from 'stylis'
 
 //material
 import {
-    Button,
+    Button,Typography
 } from '@mui/material'
+
+// UI COMPONENTS
+import Header from "./components/ui/Header"
+import {myTheme}  from './components/ui/theme'
 
 //NOTE cacheTRL
 const cacheRTL = createCache({
@@ -16,27 +25,27 @@ const cacheRTL = createCache({
     stylisPlugins : [prefixer, rtlPlug]
 })
 
-const myTheme = createTheme({
-    direction : "rtl",
-    typography: {
-        fontFamily: "Dirooz, vazir",
-    }
-})
-
 
 const App =()=>{
-
-
 
     return(
     < CacheProvider value={cacheRTL}>
         <ThemeProvider theme={myTheme}>
-        <Button variant="contained"
-                seze='large'
+            <HelmetProvider>
+                <Helmet>
+                    <title>وب لاگ شخصی</title>
+                </Helmet>
+            </HelmetProvider>
+            <Header/>
+            <>
 
-        >
-            دکمه
-        </Button>
+            <Typography variant="caption" sx={{marginTop: "5px"}}>
+
+                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+            </Typography>
+
+            </>
+
         </ThemeProvider>
     </CacheProvider>
     )
