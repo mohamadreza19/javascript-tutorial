@@ -8,6 +8,7 @@ export const ColorsDark = {
   logo: "#C7C7C7",
   backgound: "#171717",
   text: "#E3E3E3",
+  gray: "#2E2E2E",
 };
 
 export const themeDark = createTheme({
@@ -33,4 +34,10 @@ export const cacheRTL = createCache({
   stylisPlugins: [prefixer, stylisRTLPlugin],
 });
 
-export const ContainerRoot = styled(Box)(() => ({}));
+export const ContainerRoot = styled(Box)(({ theme }) => ({
+  width: "60%",
+  margin: "0 auto",
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+  },
+}));

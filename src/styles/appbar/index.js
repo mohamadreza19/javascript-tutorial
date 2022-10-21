@@ -1,11 +1,19 @@
 import styled from "@emotion/styled";
-import { Box, Button, ButtonGroup, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Divider,
+  ListItem,
+  ListItemButton,
+  Typography,
+} from "@mui/material";
 import { ColorsDark } from "./../theme";
 
-export const DesktopContainer = styled(Box)(() => ({
+export const DesktopContainer = styled(Box)(({ desktop = true }) => ({
   display: "flex",
-  width: "80%",
-  justifyContent: "center",
+  width: "100%",
+  justifyContent: "space-between",
 }));
 
 export const LogoBox = styled(Box)(() => ({
@@ -40,4 +48,13 @@ export const RegisterBox = styled(Box)(() => ({
 }));
 export const DividerAppbar = styled(Divider)(() => ({
   borderColor: ColorsDark.logo,
+}));
+//mobile
+export const MenuButton = styled(Button)(() => ({}));
+
+export const MyListItemButton = styled(ListItemButton)(() => ({
+  padding: 16,
+  margin: 0,
+  backgroundColor: ColorsDark.gray,
+  borderBottom: `1px solid #454545`,
 }));
