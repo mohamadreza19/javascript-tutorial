@@ -1,4 +1,12 @@
-import { Box, Grid, Link, styled, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Link,
+  ListItem,
+  styled,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 export const MainContainer = styled(Box)(({}) => ({
   display: "flex",
@@ -56,3 +64,27 @@ export function MyLink({ children, href }) {
     </StyledLink>
   );
 }
+//Main
+export const InfoBox = styled(Box)(() => ({
+  marginTop: "2rem",
+}));
+export const InfoContectText = styled(Typography)(({ theme }) => ({
+  color: "secondary",
+  marginTop: "1rem",
+}));
+export const InfoListItem = styled(ListItem)(() => ({
+  padding: 0,
+}));
+
+export const SectionBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  border: `1px solid #454545 `,
+  padding: "1.5rem",
+  borderRadius: "1rem",
+  marginTop: "2rem",
+}));
+export const TextPatch = styled(Typography)(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  display: "inline",
+  marginLeft: 2,
+}));

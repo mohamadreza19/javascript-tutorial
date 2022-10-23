@@ -26,6 +26,9 @@ export const themeDark = createTheme({
   },
   typography: {
     fontFamily: "Dirooz, ubonto",
+    body1: {
+      fontSize: "1rem",
+    },
   },
 });
 
@@ -37,6 +40,9 @@ export const cacheRTL = createCache({
 export const ContainerRoot = styled(Box)(({ theme }) => ({
   width: "60%",
   margin: "0 auto",
+  [theme.breakpoints.down("lg")]: {
+    width: "100%",
+  },
   [theme.breakpoints.down("md")]: {
     width: "100%",
   },
