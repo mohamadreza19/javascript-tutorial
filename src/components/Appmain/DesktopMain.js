@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Outlet, useParams, useLocation } from "react-router-dom";
 import { useUiContext } from "../../contextApi/uiContext";
 import {
   InfoBox,
@@ -25,26 +26,29 @@ import {
 
 export default function DesktopMain() {
   const { contents } = useUiContext();
+  const { pathname } = useLocation();
 
-  console.log(contents);
-
-  const previewMaped = contents.map((content, index) => {
-    return (
-      <SectionBox key={index}>
-        <Typography color="primary" variant="h5">
-          بخش{index + 1}. {content.categories[1]}
-        </Typography>
-        <List>
-          <ListItem>
-            <ListItemText>
-              <MyLink href="#">{content.title}</MyLink>
-              <TextPatch variant="body1">_{content.shortDescription}</TextPatch>
-            </ListItemText>
-          </ListItem>
-        </List>
-      </SectionBox>
-    );
-  });
+  const PreviewMaped = function () {
+    return contents.map((content, index) => {
+      return (
+        <SectionBox key={index}>
+          <Typography color="primary" variant="h5">
+            بخش{index + 1}. {content.categories[1]}
+          </Typography>
+          <List>
+            <ListItem>
+              <ListItemText>
+                <MyLink href="#">{content.title}</MyLink>
+                <TextPatch variant="body1">
+                  _{content.shortDescription}
+                </TextPatch>
+              </ListItemText>
+            </ListItem>
+          </List>
+        </SectionBox>
+      );
+    });
+  };
 
   const sideBarMaped = contents.map((content, index) => {
     return (
@@ -53,7 +57,9 @@ export default function DesktopMain() {
         <List>
           <ListItem>
             <ListItemText>
-              <MyLink href="#">{content.title}</MyLink>
+              <MyLink href={`/${content.title}`}>
+                {content.title.replaceAll("-", " ")}
+              </MyLink>
             </ListItemText>
           </ListItem>
         </List>
@@ -64,49 +70,55 @@ export default function DesktopMain() {
     <MainContainer>
       <ParentGrid container>
         <Grid md={8} xs={12} item>
-          <MyBox>
-            <header>
-              <Typography color="primary" variant="h4">
-                اموزش جاوا اسکریپت
-              </Typography>
-            </header>
-            <InfoBox>
-              <InfoContectText color="secondary" variant="body1">
-                به وب سایت JavaScriptTutorial.net خوش آمدید! این آموزش جاوا
-                اسکریپت به شما کمک می کند زبان برنامه نویسی جاوا اسکریپت را از
-                ابتدا به سرعت و به طور موثر یاد بگیرید.
-              </InfoContectText>
-              <InfoContectText color="secondary" variant="body1">
-                اگر شما ...
-              </InfoContectText>
-              <List>
-                <InfoListItem>
+          {pathname === "/" ? (
+            <>
+              <MyBox>
+                <header>
+                  <Typography color="primary" variant="h4">
+                    اموزش جاوا اسکریپت
+                  </Typography>
+                </header>
+                <InfoBox>
                   <InfoContectText color="secondary" variant="body1">
-                    <ArrowBackIos fontSize="small" />
-                    مطمئن نیستید از کجا شروع کنید
+                    به وب سایت JavaScriptTutorial.net خوش آمدید! این آموزش جاوا
+                    اسکریپت به شما کمک می کند زبان برنامه نویسی جاوا اسکریپت را
+                    از ابتدا به سرعت و به طور موثر یاد بگیرید.
                   </InfoContectText>
-                </InfoListItem>
-                <InfoListItem>
                   <InfoContectText color="secondary" variant="body1">
-                    <ArrowBackIos fontSize="small" />
-                    از کپی پیست کردن کد بقیه خسته شدی
+                    اگر شما ...
                   </InfoContectText>
-                </InfoListItem>
-                <InfoListItem>
-                  <InfoContectText color="secondary" variant="body1">
-                    <ArrowBackIos fontSize="small" />
-                    دوست داری بیشتر بفهمی
-                  </InfoContectText>
-                </InfoListItem>
-                <InfoListItem>
-                  <InfoContectText color="secondary" variant="body1">
-                    JavaScriptTutorial.net مکان خوبی برای شروع است.
-                  </InfoContectText>
-                </InfoListItem>
-              </List>
-            </InfoBox>
-          </MyBox>
-          {previewMaped}
+                  <List>
+                    <InfoListItem>
+                      <InfoContectText color="secondary" variant="body1">
+                        <ArrowBackIos fontSize="small" />
+                        مطمئن نیستید از کجا شروع کنید
+                      </InfoContectText>
+                    </InfoListItem>
+                    <InfoListItem>
+                      <InfoContectText color="secondary" variant="body1">
+                        <ArrowBackIos fontSize="small" />
+                        از کپی پیست کردن کد بقیه خسته شدی
+                      </InfoContectText>
+                    </InfoListItem>
+                    <InfoListItem>
+                      <InfoContectText color="secondary" variant="body1">
+                        <ArrowBackIos fontSize="small" />
+                        دوست داری بیشتر بفهمی
+                      </InfoContectText>
+                    </InfoListItem>
+                    <InfoListItem>
+                      <InfoContectText color="secondary" variant="body1">
+                        JavaScriptTutorial.net مکان خوبی برای شروع است.
+                      </InfoContectText>
+                    </InfoListItem>
+                  </List>
+                </InfoBox>
+              </MyBox>
+              <PreviewMaped />
+            </>
+          ) : (
+            <Outlet />
+          )}
         </Grid>
         <Grid item md={4} xs={12}>
           <Box>
