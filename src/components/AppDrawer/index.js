@@ -6,11 +6,12 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { useUiContext } from "../../contextApi/uiContext";
+import { useContext } from "react";
+import { UiContext } from "../../contextApi/uiContext";
 import { MyListItemButton } from "../../styles/appbar";
 
 export default function AppDrawer() {
-  const { openDrawer } = useUiContext();
+  const { openDrawer } = useContext(UiContext);
 
   const Drawer = (
     <>

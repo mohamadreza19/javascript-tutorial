@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 export const MainContainer = styled(Box)(({}) => ({
   display: "flex",
@@ -23,10 +24,11 @@ export const MyBox = styled(Box)(() => ({
 }));
 
 export const SearchBox = styled(TextField)(({ theme }) => ({
-  "& .MuiInputBase-input": {
+  ".MuiInputBase-input": {
     color: theme.palette.primary.main,
     height: "35px",
   },
+
   ".MuiInputLabel-root": {
     color: theme.palette.primary.main,
   },
@@ -53,13 +55,14 @@ export const TilteText = styled(Typography)(({ theme }) => ({
 }));
 
 export function MyLink({ children, href }) {
-  const StyledLink = styled(Link)(({ theme }) => ({
+  const StyledLink = styled(NavLink)(({ theme }) => ({
     color: "#7FB4E0",
     fontSize: "1rem",
+    textDecoration: "none",
   }));
 
   return (
-    <StyledLink href={href} underline="none">
+    <StyledLink to={href} underline="none">
       {children}
     </StyledLink>
   );

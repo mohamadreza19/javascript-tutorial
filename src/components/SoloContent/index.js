@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { Skeleton, Typography } from "@mui/material";
+import { useEffect, useState, useContext } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useUiContext } from "../../contextApi/uiContext";
+import { UiContext } from "../../contextApi/uiContext";
 import {
   ContinerSoloContent,
   TitleBox,
@@ -8,29 +9,78 @@ import {
   BodyBox,
   Body,
 } from "../../styles/solocontent";
+import { ColorsDark } from "../../styles/theme";
 
 export default function SoloContent() {
   const { title } = useParams();
-  const { contents, content, setContent } = useUiContext();
+  const { loading, setLoading, contents, content, setContent } =
+    useContext(UiContext);
 
-  useEffect(function () {
-    const matchedContent = contents.find((content) => {
-      return content.title === title;
-    });
-    console.log(matchedContent);
-    setContent(matchedContent);
+  const { pathname } = useLocation();
+
+  useEffect(
+    function () {
+      const setDataContent = async () => {
+        try {
+          setLoading(true);
+          const matchedContent = contents.find((content) => {
+            return content.title === title;
+          });
+
+          setContent((draft) => matchedContent);
+          setLoading((draft) => false);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      setDataContent();
+    },
+    [contents.length, pathname]
+  );
+  useEffect(() => {
+    return () => {
+      setContent(() => {
+        return {};
+      });
+    };
   }, []);
-
   return (
     <>
-      <ContinerSoloContent>
-        <TitleBox>
-          <Title variant="h5">{content.title.replaceAll("-", " ")}</Title>
-        </TitleBox>
-        <BodyBox>
-          <Body variant="body1">{content.body}</Body>
-        </BodyBox>
-      </ContinerSoloContent>
+      {loading ? (
+        <>
+          <TitleBox>
+            <Title>
+              <Skeleton
+                sx={{ bgcolor: ColorsDark.gray }}
+                width={"60%"}
+                variant="text"
+              ></Skeleton>
+            </Title>
+          </TitleBox>
+          <BodyBox>
+            <Body variant="body1">
+              <Skeleton
+                sx={{ bgcolor: ColorsDark.gray, height: "128px" }}
+                variant="text"
+              ></Skeleton>
+            </Body>
+          </BodyBox>
+        </>
+      ) : (
+        <>
+          {Object.keys(content).length > 0 && (
+            <ContinerSoloContent>
+              <TitleBox>
+                <Title variant="h5">{content.title.replaceAll("-", " ")}</Title>
+              </TitleBox>
+              <BodyBox>
+                <Body variant="body1">{content.body}</Body>
+              </BodyBox>
+            </ContinerSoloContent>
+          )}
+        </>
+      )}
     </>
   );
 }

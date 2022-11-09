@@ -1,119 +1,183 @@
-import {
-  Box,
-  Grid,
-  List,
-  ListItemText,
-  Typography,
-  styled,
-  Divider,
-  createTheme,
-  ThemeProvider,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Menu,
-} from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { MdOutlineChatBubble } from "react-icons/md";
+import { createContext } from "react";
+import { useImmer } from "use-immer";
+const NamedContext = createContext({});
 
-const Colors = {
-  AppBarContainer: "F9F8FD",
-  secondary: "595861",
-};
-
-const theme = createTheme({
-  typography: {
-    fontFamily: "Dirooz,roboto",
-  },
-  palette: {
-    secondary: {
-      main: grey[400],
-    },
-  },
-});
-
-const AppBarContainer = styled(Box)(() => ({
-  background: Colors.AppBarContainer,
-  margin: "20px 40px 0px 40px",
-  padding: 0,
-}));
-const MyList = styled(List)(() => ({
-  display: "flex",
-  // justifyContent: "center",
-  fontSize: "42px",
-}));
-const LogoContainer = styled(Box)(() => ({
-  display: "flex",
-  justifyContent: "space-between",
-}));
-const ActionsButtonContainer = styled(Box)(() => ({}));
-
-export default function Test() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  console.log(open);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  return (
-    <ThemeProvider theme={theme}>
-      <AppBarContainer>
-        <MyList>
-          <Box display="flex" width="200px" justifyContent="space-between">
-            <LogoContainer>
-              <MdOutlineChatBubble color="3C68FF" />
-              <h4 style={{ marginRight: "6px" }}>نونیتو</h4>
-            </LogoContainer>
-
-            <Divider
-              orientation="vertical"
-              flexItem
-              sx={{
-                bgcolor: "E2E4E4",
-                borderWidth: 1,
-                marginRight: "40px",
-                marginLeft: "40px",
-              }}
-            />
-            <ActionsButtonContainer>
-              <Box display="flex">
-                <Button
-                  color="secondary"
-                  id="basic-button"
-                  aria-controls={open ? "basic-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                  onClick={handleClick}
-                  sx={{
-                    fontSize: "16px",
-                  }}
-                >
-                  محصولات
-                </Button>
-                <Menu
-                  id="basic-menu"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                  MenuListProps={{
-                    "aria-labelledby": "basic-button",
-                  }}
-                >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
-                </Menu>
-              </Box>
-            </ActionsButtonContainer>
-          </Box>
-        </MyList>
-      </AppBarContainer>
-    </ThemeProvider>
+export default function TApp() {
+  console.log(
+    "%c TAppContainer start render",
+    "background: #153462; color: #F6F6C9"
   );
+  const [serverData, setServerData] = useImmer([
+    // {
+    //   name: "name",
+    //   age: 0,
+    // },
+  ]);
+  const [loading, setLoading] = useImmer(false);
+  console.log(
+    `%c serverData state init ${serverData}`,
+    "background: #222; color: #bada55"
+  );
+  useEffect(() => {
+    console.log(
+      "%c fetch started in useEffect TApp",
+      "background: #222; color: #FF97C1"
+    );
+    const fetch = () => {
+      const fetchedData = [
+        {
+          name: "mmd",
+          age: 22,
+        },
+        {
+          name: "ali",
+          age: 21,
+        },
+      ];
+      try {
+        setLoading(true);
+        setServerData(fetchedData);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+    fetch();
+    console.log(
+      "%c fetch ended in useEffect TApp",
+      "background: #222; color: #FF97C1"
+    );
+  }, []);
+
+  console.log("%c start outputing TApp", "background: #153462; color: #F6F6C9");
+  const outPut = (
+    <>
+      <NamedContext.Provider
+        value={{ serverData, setServerData, loading, setLoading }}
+      >
+        <div
+          style={{
+            width: "1000px",
+            border: "1px solid black",
+            marginBottom: "2rem",
+          }}
+        >
+          <h1
+            style={{
+              marginBottom: "2rem",
+            }}
+          >
+            TAppContainer
+          </h1>
+          <Child2 />
+        </div>
+      </NamedContext.Provider>
+    </>
+  );
+
+  console.log("%c render end TApp", "background: #153462; color: #F6F6C9");
+  return outPut;
 }
+
+const Child1 = () => {
+  return (
+    <>
+      <div
+        style={{
+          width: "500px",
+          border: "1px solid black",
+          marginBottom: "2rem",
+        }}
+      >
+        <h1
+          style={{
+            marginBottom: "2rem",
+          }}
+        >
+          child1AppContainer
+          <Child2 />
+        </h1>
+      </div>
+    </>
+  );
+};
+const Child2 = () => {
+  console.log(
+    "%c child2AppContainer start render",
+    "background: #153462; color: #F6F6C9"
+  );
+  const { serverData, loading, setLoading } = useContext(NamedContext);
+  console.log(
+    `%c child2 useContext(NamedContext) ${serverData} init`,
+    "background: #222; color: #bada55"
+  );
+  const [user, setUser] = useImmer({
+    name: "",
+    age: 0,
+  });
+  console.log(
+    `%c child2 name state init ${user}`,
+    "background: #222; color: #bada55"
+  );
+  useEffect(() => {
+    console.log("%c child2 effect start", "background: #222; color: #FF97C1");
+    const Filter = async () => {
+      console.log(
+        `%c read serverData in useEffect Child2`,
+        "background: #222; color: #bada55"
+      );
+      console.log(serverData);
+      try {
+        setLoading(true);
+
+        const findName = serverData.find((f) => {
+          return f.name === "mmd";
+        });
+        console.log(findName);
+        setUser((draft) => {
+          return findName;
+        });
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+    Filter();
+    console.log("%c child2 effect end", "background: #222; color: #FF97C1");
+  }, [serverData.length > 0]);
+  console.log(
+    "%c start outputing Child2",
+    "background: #153462; color: #F6F6C9"
+  );
+  const out = (
+    <>
+      {loading ? (
+        <h1>loading</h1>
+      ) : (
+        <div
+          style={{
+            width: "300px",
+            border: "1px solid black",
+            marginBottom: "2rem",
+          }}
+        >
+          <h1>child2AppContainer</h1>
+          <h2
+            style={{
+              color: "red",
+            }}
+          >
+            {user.name}
+          </h2>
+        </div>
+      )}
+    </>
+  );
+  console.log("%c outputing Child2 end", "background: #153462; color: #F6F6C9");
+  return out;
+};

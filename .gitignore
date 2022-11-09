@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
-/server/node_modules
+/server
 .pnp.js
 
 # testing

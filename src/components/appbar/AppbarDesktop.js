@@ -1,4 +1,6 @@
 import { Box } from "@mui/material";
+import { NavLink, useNavigate } from "react-router-dom";
+
 import {
   DesktopContainer,
   LogoText,
@@ -9,25 +11,32 @@ import {
   RegisterBox,
   RegisterActionButtonGroup,
   DividerAppbar,
+  MyLink,
 } from "../../styles/appbar";
 
 export default function AppbarDesktop() {
+  const navigate = useNavigate();
   return (
     <>
       <DesktopContainer>
-        <LogoBox>
+        <LogoBox
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <Logo src="/images/logo.svg" />
           <LogoText variant="h5" color={"primary"}>
             JavaScript
           </LogoText>
         </LogoBox>
         <ActionButtonBox>
-          <ActionButton>خانه</ActionButton>
-          <ActionButton>ES6</ActionButton>
-          <ActionButton>بام(js Bom)</ActionButton>
-          <ActionButton>دام(js ِDom)</ActionButton>
-          <ActionButton>دام(js ِDom)</ActionButton>
-          <ActionButton>تماس با ما</ActionButton>
+          <MyLink href={"/"}>خانه</MyLink>
+
+          <MyLink href={"#"}>ES6</MyLink>
+          <MyLink href={"#"}>بام(js Bom)</MyLink>
+          <MyLink href={"#"}>دام(js ِDom)</MyLink>
+          <MyLink href={"#"}>دام(js ِDom)</MyLink>
+          <MyLink href={"#"}>تماس با ما</MyLink>
           <RegisterBox>
             <RegisterActionButtonGroup
               sx={{ position: "relative", top: "2px" }}
@@ -36,8 +45,16 @@ export default function AppbarDesktop() {
               aria-label="Disabled elevation buttons"
               size="large"
             >
-              <ActionButton>ثبت نام</ActionButton>
-              <ActionButton>ورود</ActionButton>
+              <ActionButton
+                onClick={() => {
+                  navigate("/register");
+                }}
+              >
+                ثبت نام
+              </ActionButton>
+              <ActionButton>
+                <MyLink href={"/login"}>ورود</MyLink>
+              </ActionButton>
             </RegisterActionButtonGroup>
           </RegisterBox>
         </ActionButtonBox>

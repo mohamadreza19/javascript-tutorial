@@ -13,7 +13,7 @@ import { UiContext } from "../../contextApi/uiContext";
 import { useUiContext } from "./../../contextApi/uiContext";
 import AppDrawer from "../AppDrawer";
 export default function AppbarMobile() {
-  const { openDrawer, setOpenDrawer } = useUiContext();
+  const { openDrawer, setOpenDrawer } = useContext(UiContext);
 
   const handleClick = () => {
     setOpenDrawer((pre) => !pre);

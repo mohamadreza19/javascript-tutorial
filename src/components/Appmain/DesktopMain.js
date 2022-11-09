@@ -1,4 +1,4 @@
-import { ArrowBackIos, Brightness1 } from "@mui/icons-material";
+import { ArrowBackIos } from "@mui/icons-material";
 import {
   Box,
   Grid,
@@ -8,8 +8,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Outlet, useParams, useLocation } from "react-router-dom";
-import { useUiContext } from "../../contextApi/uiContext";
+import { useContext, useEffect } from "react";
+
+import { Outlet, useLocation } from "react-router-dom";
+import { UiContext } from "../../contextApi/uiContext";
 import {
   InfoBox,
   InfoContectText,
@@ -25,7 +27,7 @@ import {
 } from "../../styles/appmain";
 
 export default function DesktopMain() {
-  const { contents } = useUiContext();
+  const { contents, setLoading } = useContext(UiContext);
   const { pathname } = useLocation();
 
   const PreviewMaped = function () {
@@ -33,12 +35,14 @@ export default function DesktopMain() {
       return (
         <SectionBox key={index}>
           <Typography color="primary" variant="h5">
-            بخش{index + 1}. {content.categories[1]}
+            بخش{index + 1}. {content.categories[1].replaceAll("-", " ")}
           </Typography>
           <List>
             <ListItem>
               <ListItemText>
-                <MyLink href="#">{content.title}</MyLink>
+                <MyLink href={`/${content.title}`}>
+                  {content.title.replaceAll("-", " ")}
+                </MyLink>
                 <TextPatch variant="body1">
                   _{content.shortDescription}
                 </TextPatch>
@@ -53,7 +57,9 @@ export default function DesktopMain() {
   const sideBarMaped = contents.map((content, index) => {
     return (
       <MyBox key={index}>
-        <TilteText variant="caption">{content.categories[1]}</TilteText>
+        <TilteText variant="caption">
+          {content.categories[1].replaceAll("-", " ")}
+        </TilteText>
         <List>
           <ListItem>
             <ListItemText>

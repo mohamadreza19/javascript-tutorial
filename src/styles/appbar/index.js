@@ -7,7 +7,9 @@ import {
   ListItem,
   ListItemButton,
   Typography,
+  Link,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 import { ColorsDark } from "./../theme";
 
 export const DesktopContainer = styled(Box)(({ desktop = true }) => ({
@@ -19,6 +21,9 @@ export const DesktopContainer = styled(Box)(({ desktop = true }) => ({
 export const LogoBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
+  ":hover": {
+    cursor: "pointer",
+  },
 }));
 
 export const LogoText = styled(Typography)(() => ({
@@ -34,6 +39,22 @@ export const ActionButtonBox = styled(Box)(() => ({
   display: "flex",
   marginLeft: "15%",
 }));
+export function MyLink({ children, href }) {
+  const StyledLink = styled(NavLink)(({ theme }) => ({
+    color: ColorsDark.text,
+    fontSize: "1rem",
+    textDecoration: "none",
+    "&:hover": {
+      color: ColorsDark.text,
+    },
+  }));
+
+  return (
+    <ActionButton>
+      <StyledLink to={href}>{children}</StyledLink>
+    </ActionButton>
+  );
+}
 
 export const ActionButton = styled(Button)(() => ({}));
 export const RegisterActionButtonGroup = styled(ButtonGroup)(() => ({
