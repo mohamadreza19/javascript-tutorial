@@ -6,6 +6,7 @@ const contentRouter = require("./router/index");
 const registerRouter = require("./router/register");
 const cookieParser = require("cookie-parser");
 const app = express();
+const port = process.env.PORT || 3030;
 app.use(cors());
 require("dotenv").config({ path: "./config/config.env" });
 app.use(express.json());
@@ -19,7 +20,7 @@ app.get("*", (req, res) => {
 async function Start() {
   try {
     mongoConnetion();
-    app.listen(3030, () => {
+    app.listen(port, () => {
       console.log("hello server is runnig on port 3030 !!");
     });
   } catch (error) {
