@@ -5,10 +5,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  TextField,
   Typography,
 } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import { Outlet, useLocation } from "react-router-dom";
 import { UiContext } from "../../contextApi/uiContext";
@@ -24,6 +23,7 @@ import {
   InfoListItem,
   SectionBox,
   TextPatch,
+  SearchBoxBox,
 } from "../../styles/appmain";
 
 export default function DesktopMain() {
@@ -31,47 +31,69 @@ export default function DesktopMain() {
   const { pathname } = useLocation();
 
   const PreviewMaped = function () {
-    return contents.map((content, index) => {
+    const uniquecategoriesArray = [
+      ...new Set(contents.map((content, index) => content.categories[1])),
+    ];
+    const previewMaped = uniquecategoriesArray.map((category, index) => {
       return (
         <SectionBox key={index}>
           <Typography color="primary" variant="h5">
-            بخش{index + 1}. {content.categories[1].replaceAll("-", " ")}
+            بخش{index + 1}. {category.replaceAll("-", " ")}
           </Typography>
-          <List>
-            <ListItem>
-              <ListItemText>
-                <MyLink href={`/${content.title}`}>
-                  {content.title.replaceAll("-", " ")}
-                </MyLink>
-                <TextPatch variant="body1">
-                  _{content.shortDescription}
-                </TextPatch>
-              </ListItemText>
-            </ListItem>
-          </List>
+          {contents.map((preview, index) => {
+            if (preview.categories[1] === category) {
+              return (
+                <List key={index}>
+                  <ListItem>
+                    <ListItemText>
+                      <MyLink href={`/category/${preview.title}`}>
+                        {preview.title.replaceAll("-", " ")}
+                      </MyLink>
+                      <TextPatch variant="body1">
+                        _{preview.shortDescription}
+                      </TextPatch>
+                    </ListItemText>
+                  </ListItem>
+                </List>
+              );
+            }
+          })}
         </SectionBox>
       );
     });
+    return <>{previewMaped}</>;
   };
 
-  const sideBarMaped = contents.map((content, index) => {
-    return (
-      <MyBox key={index}>
-        <TilteText variant="caption">
-          {content.categories[1].replaceAll("-", " ")}
-        </TilteText>
-        <List>
-          <ListItem>
-            <ListItemText>
-              <MyLink href={`/${content.title}`}>
-                {content.title.replaceAll("-", " ")}
-              </MyLink>
-            </ListItemText>
-          </ListItem>
-        </List>
-      </MyBox>
-    );
-  });
+  const SideBarMaped = () => {
+    const uniquecategoriesArray = [
+      ...new Set(contents.map((content, index) => content.categories[1])),
+    ];
+
+    const sideBarMaped = uniquecategoriesArray.map((category, index) => {
+      return (
+        <MyBox key={index}>
+          <TilteText variant="caption">
+            {category.replaceAll("-", " ")}
+          </TilteText>
+          {contents.map((content, index) => {
+            if (content.categories[1] === category)
+              return (
+                <List key={index}>
+                  <ListItem>
+                    <ListItemText>
+                      <MyLink href={`/category/${content.title}`}>
+                        {content.title.replaceAll("-", " ")}
+                      </MyLink>
+                    </ListItemText>
+                  </ListItem>
+                </List>
+              );
+          })}
+        </MyBox>
+      );
+    });
+    return <>{sideBarMaped}</>;
+  };
   return (
     <MainContainer>
       <ParentGrid container>
@@ -86,7 +108,7 @@ export default function DesktopMain() {
                 </header>
                 <InfoBox>
                   <InfoContectText color="secondary" variant="body1">
-                    به وب سایت JavaScriptTutorial.net خوش آمدید! این آموزش جاوا
+                    به وب سایت JavaScriptTutorial خوش آمدید! این آموزش جاوا
                     اسکریپت به شما کمک می کند زبان برنامه نویسی جاوا اسکریپت را
                     از ابتدا به سرعت و به طور موثر یاد بگیرید.
                   </InfoContectText>
@@ -114,7 +136,7 @@ export default function DesktopMain() {
                     </InfoListItem>
                     <InfoListItem>
                       <InfoContectText color="secondary" variant="body1">
-                        JavaScriptTutorial.net مکان خوبی برای شروع است.
+                        JavaScriptTutorial مکان خوبی برای شروع است.
                       </InfoContectText>
                     </InfoListItem>
                   </List>
@@ -127,7 +149,7 @@ export default function DesktopMain() {
           )}
         </Grid>
         <Grid item md={4} xs={12}>
-          <Box>
+          <SearchBoxBox>
             <SearchBox
               className="bb"
               id="outlined-basic"
@@ -135,11 +157,11 @@ export default function DesktopMain() {
               variant="outlined"
               fullWidth
               color="secondary"
-              placeholder="حست جو ..."
+              placeholder="جست جو ..."
               size="big"
             />
-          </Box>
-          {sideBarMaped}
+          </SearchBoxBox>
+          <SideBarMaped />
         </Grid>
       </ParentGrid>
     </MainContainer>

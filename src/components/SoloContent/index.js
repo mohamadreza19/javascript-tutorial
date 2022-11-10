@@ -1,6 +1,6 @@
 import { Skeleton, Typography } from "@mui/material";
 import { useEffect, useState, useContext } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UiContext } from "../../contextApi/uiContext";
 import {
   ContinerSoloContent,
@@ -17,7 +17,7 @@ export default function SoloContent() {
     useContext(UiContext);
 
   const { pathname } = useLocation();
-
+  const navigate = useNavigate();
   useEffect(
     function () {
       const setDataContent = async () => {
@@ -27,6 +27,7 @@ export default function SoloContent() {
             return content.title === title;
           });
 
+          if (!matchedContent) return navigate("/404");
           setContent((draft) => matchedContent);
           setLoading((draft) => false);
         } catch (error) {

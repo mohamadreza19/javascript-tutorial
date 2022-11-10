@@ -13,3 +13,8 @@ export const LoginAuthor = async (feilds) => {
   const url = `${address}/login`;
   return axios.post(url, feilds);
 };
+export const CreateContent = async (feilds) => {
+  const url = `${address}/content/create-content`;
+
+  return axios.post(url, feilds);
+};

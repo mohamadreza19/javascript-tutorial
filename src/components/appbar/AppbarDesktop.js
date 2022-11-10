@@ -25,14 +25,14 @@ export default function AppbarDesktop() {
           }}
         >
           <Logo src="/images/logo.svg" />
-          <LogoText variant="h5" color={"primary"}>
+          <LogoText variant="h5" color="primary">
             JavaScript
           </LogoText>
         </LogoBox>
         <ActionButtonBox>
           <MyLink href={"/"}>خانه</MyLink>
 
-          <MyLink href={"#"}>ES6</MyLink>
+          <MyLink href={"/create-post"}>ساخت پست</MyLink>
           <MyLink href={"#"}>بام(js Bom)</MyLink>
           <MyLink href={"#"}>دام(js ِDom)</MyLink>
           <MyLink href={"#"}>دام(js ِDom)</MyLink>
@@ -52,8 +52,12 @@ export default function AppbarDesktop() {
               >
                 ثبت نام
               </ActionButton>
-              <ActionButton>
-                <MyLink href={"/login"}>ورود</MyLink>
+              <ActionButton
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                ورود
               </ActionButton>
             </RegisterActionButtonGroup>
           </RegisterBox>

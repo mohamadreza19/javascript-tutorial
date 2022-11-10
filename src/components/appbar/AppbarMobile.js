@@ -10,7 +10,7 @@ import {
 import { Menu, Close } from "@mui/icons-material";
 import { useContext } from "react";
 import { UiContext } from "../../contextApi/uiContext";
-import { useUiContext } from "./../../contextApi/uiContext";
+
 import AppDrawer from "../AppDrawer";
 export default function AppbarMobile() {
   const { openDrawer, setOpenDrawer } = useContext(UiContext);

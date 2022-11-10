@@ -22,31 +22,17 @@ export const MyBox = styled(Box)(() => ({
   flexDirection: "column",
   marginTop: "1rem",
 }));
+export const SearchBoxBox = styled(Box)(({ theme }) => ({
+  width: "100%",
+  [theme.breakpoints.down("md")]: {
+    marginTop: "2rem",
+  },
+}));
 
 export const SearchBox = styled(TextField)(({ theme }) => ({
   ".MuiInputBase-input": {
     color: theme.palette.primary.main,
     height: "35px",
-  },
-
-  ".MuiInputLabel-root": {
-    color: theme.palette.primary.main,
-  },
-  ".MuiInputLabel-root:hover": {
-    borderColor: "white",
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: theme.palette.secondary.main,
-    },
-    "&:hover fieldset": {
-      borderColor: "#EDDC3D",
-    },
-    input: {
-      "&::placeholder": {
-        color: theme.palette.secondary.main,
-      },
-    },
   },
 }));
 export const TilteText = styled(Typography)(({ theme }) => ({

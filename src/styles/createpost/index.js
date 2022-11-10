@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   InputLabel,
   Select,
   styled,
@@ -74,5 +75,23 @@ export const CpSelect = styled(Select)(({ theme }) => ({
 
   ".MuiSvgIcon-root ": {
     fill: "white !important",
+  },
+}));
+
+export const CpSubmitButtonBox = styled(Box)(({}) => ({
+  width: 400,
+  marginTop: "2rem",
+}));
+export const CpSubmitButton = styled(Button)(({}) => ({
+  width: "100%",
+  fontSize: "2rem",
+  color: ColorsDark.backgound,
+  backgroundColor: ColorsDark.text,
+  "&:hover": {
+    backgroundColor: ColorsDark.logo,
+    borderColor: "#0062cc",
+  },
+  "&:active": {
+    backgroundColor: ColorsDark.text,
   },
 }));

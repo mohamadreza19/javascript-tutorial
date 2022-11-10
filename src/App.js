@@ -17,7 +17,7 @@ import { findContect } from "./services";
 import { cacheRTL, themeDark, ContainerRoot } from "./styles/theme";
 
 export default function App() {
-  const [openDrawer, setOpenDrawer] = useImmer(true);
+  const [openDrawer, setOpenDrawer] = useImmer(false);
   const [loading, setLoading] = useImmer(false);
   const [contents, setContents] = useImmer([
     { categories: "ss", title: "initTitle" },
@@ -25,24 +25,30 @@ export default function App() {
   const [content, setContent] = useImmer({});
   const [credit, setCredit] = useImmer(false);
 
-  useEffect(function () {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const { data, status } = await findContect();
+  useEffect(
+    function () {
+      const fetchData = async () => {
+        try {
+          setLoading(true);
+          const { data, status } = await findContect();
 
-        if (status === 200) {
-          setContents(data);
-          setLoading(false);
-        } else {
-          console.log("مشکلی در دریافت اطلاعات از سمت سرور پیش امده است");
+          if (status === 200) {
+            setContents(data);
+            setLoading(false);
+          } else {
+            console.log("مشکلی در دریافت اطلاعات از سمت سرور پیش امده است");
+          }
+        } catch (error) {
+          console.log(
+            error,
+            "مشکلی در دریافت اطلاعات از سمت سرور پیش امده است"
+          );
         }
-      } catch (error) {
-        console.log(error, "مشکلی در دریافت اطلاعات از سمت سرور پیش امده است");
-      }
-    };
-    fetchData();
-  }, []);
+      };
+      fetchData();
+    },
+    [undefined, loading]
+  );
 
   return (
     <>
@@ -67,7 +73,7 @@ export default function App() {
               <AppBar />
               <Routes>
                 <Route path="/" element={<Main />}>
-                  <Route path="/:title" element={<SoloContent />} />
+                  <Route path="/category/:title" element={<SoloContent />} />
                 </Route>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />

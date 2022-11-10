@@ -75,7 +75,8 @@ export default function Register() {
         <RtTextFieldBox>
           <RtTextField
             name="email"
-            variant="filled"
+            variant="standard"
+            focused
             label="ایمیل"
             error={email.err ? true : false}
             value={email.email}
@@ -89,8 +90,9 @@ export default function Register() {
           />
           <RtTextField
             name="password"
+            focused
             type="password"
-            variant="filled"
+            variant="standard"
             label="پسورد"
             error={password.err ? true : false}
             value={password.password}
@@ -104,8 +106,9 @@ export default function Register() {
           />
           <RtTextField
             name="repeatpassword"
+            focused
             type="password"
-            variant="filled"
+            variant="standard"
             label="تکرار پسورد"
             error={repeatpassword.err ? true : false}
             value={repeatpassword.repeatpassword}

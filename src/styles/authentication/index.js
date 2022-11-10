@@ -23,29 +23,29 @@ export const RtTextField = styled(TextField)(({ theme }) => ({
   width: "100%",
   marginTop: "2rem",
   fontSize: theme.typography.h2,
-  color: theme.palette.primary.main,
+  // color: theme.palette.primary.main,
 
-  ".MuiFormLabel-root": {
-    color: theme.palette.primary.main,
-  },
+  // ".MuiFormLabel-root": {
+  //   color: theme.palette.primary.main,
+  // },
 
-  ".MuiInputBase-root": {
-    ":before": {
-      borderBottom: `1px solid ${theme.palette.primary.main}`,
-    },
-    color: theme.palette.primary.main,
-  },
+  // ".MuiInputBase-root": {
+  //   ":before": {
+  //     borderBottom: `1px solid ${theme.palette.primary.main}`,
+  //   },
+  //   color: theme.palette.primary.main,
+  // },
 
-  ".MuiInputBase-input": {
-    "::placeholder": {
-      color: theme.palette.primary.main,
-    },
-    ":-webkit-autofill": {
-      WebkitBoxShadow: `0 0 0px 1000px ${ColorsDark.backgound} inset !important`,
-      WebkitTextFillColor: `${theme.palette.primary.main} !important`,
-      backgroundClip: "content-box !important",
-    },
-  },
+  // ".MuiInputBase-input": {
+  //   "::placeholder": {
+  //     color: theme.palette.primary.main,
+  //   },
+  //   ":-webkit-autofill": {
+  //     WebkitBoxShadow: `0 0 0px 1000px ${ColorsDark.backgound} inset !important`,
+  //     WebkitTextFillColor: `${theme.palette.primary.main} !important`,
+  //     backgroundClip: "content-box !important",
+  //   },
+  // },
 }));
 export const RtSubmitButtonBox = styled(Box)(({}) => ({
   marginTop: "4rem",

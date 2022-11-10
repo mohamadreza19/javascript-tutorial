@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 contentSchema = new mongoose.Schema({
-  tilte: String,
+  title: String,
   auther: String,
   categories: Array,
   createdAt: {
@@ -9,6 +9,8 @@ contentSchema = new mongoose.Schema({
     default: Date.now(),
   },
   body: String,
+  categories: [String],
+  shortDescription: String,
 });
 const ContentModel = mongoose.model("contentmodels", contentSchema);
 module.exports = ContentModel;

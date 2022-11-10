@@ -13,6 +13,35 @@ export const ColorsDark = {
 
 export const themeDark = createTheme({
   direction: "rtl",
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiInputLabel-root": {
+            color: ColorsDark.text,
+          },
+          "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: ColorsDark.text,
+          },
+          "&:hover .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+            borderColor: ColorsDark.logo,
+          },
+          //Filled
+          "& .MuiFilledInput-root .MuiFilledInput-underline": {},
+          //Standard
+          "& .MuiInput-underline:before": {
+            borderBottom: `2px solid ${ColorsDark.text}`,
+          },
+          "& .MuiInput-underline:hover:before": {
+            borderBottom: "2px solid red",
+          },
+          "& .MuiInputBase-input": {
+            color: ColorsDark.text,
+          },
+        },
+      },
+    },
+  },
   palette: {
     background: {
       default: ColorsDark.backgound,

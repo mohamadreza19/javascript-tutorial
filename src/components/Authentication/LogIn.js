@@ -26,7 +26,6 @@ export default function Login() {
   });
   const navigate = useNavigate();
   const handleSubmit = async () => {
-    console.log("submit");
     try {
       const res = await LoginAuthor({
         email: email.email,
